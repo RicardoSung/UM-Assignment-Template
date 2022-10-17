@@ -1,6 +1,6 @@
 # UM-Assignment-Template
 
-## A brief
+## A Brief
 
 This repository is an assignment template of [University of Macau](https://www.um.edu.mo/) based on XeLatex. 
 
