@@ -1,0 +1,205 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Packages
+\documentclass[10pt, a4paper]{article}
+\usepackage[top=3cm, bottom=4cm, left=3.5cm, right=3.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd, fancyhdr, color, comment, graphicx, environ}
+\usepackage{float}
+\usepackage{mathrsfs}
+\usepackage[math-style=ISO]{unicode-math}
+\setmainfont{TeX Gyre Termes Math}
+\usepackage{lastpage}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{sectsty}
+\usepackage{thmtools}
+\usepackage{shadethm}
+\usepackage{hyperref}
+\usepackage{setspace}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Environment setup
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
+\newrobustcmd\ExampleText{%
+An \textit{inhomogeneous linear} differential equation has the form
+\begin{align}
+L[v ] = f,
+\end{align}
+where $L$ is a linear differential operator, $v$ is the dependent
+variable, and $f$ is a given non−zero function of the independent
+variables alone.
+}
+
+\mdtheorem[style=theoremstyle]{Problem}{Problem}
+\newenvironment{Solution}{\textbf{Solution.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}     
+\newcommand\course{Course Number\\Course Name}                      % <-- course name   
+\newcommand\hwnumber{Homework Number}                         % <-- homework number
+\newcommand\Information{Your Name\\Student Number}           % <-- personal information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Page setup
+\pagestyle{fancy}
+\headheight 35pt
+\lhead{\today}
+\rhead{\includegraphics[height=1.5cm]{amsv.png}} 
+% <-- school logo(please upload the file first, then change the name here)
+\lfoot{}
+\pagenumbering{arabic}
+\cfoot{\small\thepage}
+\rfoot{}
+\headsep 1.2em
+\renewcommand{\baselinestretch}{1.25}       
+\mdfdefinestyle{theoremstyle}{%
+linecolor=black,linewidth=1pt,%
+frametitlerule=true,%
+frametitlebackgroundcolor=gray!20,
+innertopmargin=\topskip,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Add new commands here
+\renewcommand{\labelenumi}{\alph{enumi})}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\DeclareMathOperator{\Mod}{Mod} 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Begin now!
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{3cm}
+            
+        \Huge
+         \hwnumber  
+        
+            
+        \vspace{1.5cm}
+        \Large
+            
+        \Information
+            
+        \vfill
+        
+        \course \ 
+            
+        \vspace{1.5cm}
+            
+        \includegraphics[width=0.4\textwidth]{um_badge.png}
+        \\
+        
+        \Large
+        
+        \today
+            
+    \end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Start the assignment now
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%New problem
+\newpage
+\begin{Problem}
+    \textbf{Smoothness} 
+    
+    A differential function $f$ is said to be $L$-smooth if its gradietns are Lipschitz continuous, that is
+    
+    $$
+    \|\nabla f(x)-\nabla f(y)\| \leq L\|x-y\|
+    $$
+    
+    let $f : \mathbb{R}^{d} \rightarrow \mathbb{R}$ be a twice differentiable function. If $f$ is $L$-smooth then prove the following inequality:
+    
+    \begin{itemize}
+    	\item (15 pt) Prove $\left\langle\nabla^2 f(x) v, v\right\rangle \leq L\|v\|_2^2, \quad \forall x, v \in \mathbb{R}^d$
+    	\item (15 pt) Prove	$f(y) \leq f(x)+\langle\nabla f(x), y-x\rangle+\frac{L}{2}\|y-x\|_2^2$
+    \end{itemize}
+\end{Problem}
+    
+\begin{Solution}
+	\vspace{4pt}
+	\begin{itemize}
+		\item $\left\langle\nabla^2 f(x) v, v\right\rangle \leq L\|v\|_2^2, \quad \forall x, v \in \mathbb{R}^d$
+		
+		\textbf{Proof.}
+	
+		Before proving the original inequality, we firstly prove the hessian matrix of the $L$-smooth differential function is negative semi-definite.
+		
+		$$
+		\begin{aligned}
+			&\because ||\nabla f(x) - \nabla f(y)|| \leq L||x-y|| \\
+			&\therefore ||x-y||\cdot||\nabla f(x) - \nabla f(y)|| \leq L||x-y||^2 \\
+			&\because \langle(x-y), \nabla f(x) - \nabla f(y)\rangle \leq ||x-y||\cdot||\nabla f(x) - \nabla f(y)|| (\text{ Cauchy-Schwartz Inequality})\\
+			&\text{Rearranging the above terms, we would have: } \langle Lx- \nabla f(x)+ Ly - \nabla f(y) , (x-y)\rangle	\geq 0\\
+		\end{aligned} 
+		$$
+		
+		......
+				
+		\item $f(y) \leq f(x)+\langle\nabla f(x), y-x\rangle+\frac{L}{2}\|y-x\|_2^2$
+		
+		\textbf{Proof.}
+		
+		The original inequality can be written as:
+		$$
+		f(y) - f(x)-\nabla f(x)^{T}(y-x) \leq \frac{L}{2}\|y-x\|_2^2
+		$$
+		
+		Observing the left hand side of the inequality, let $z(t)=x+t(y-x)$ and $g(t)=f(z(t))$. Then by the Newton-Leibniz formula:
+		\\
+		......
+		
+	\end{itemize}
+\end{Solution} 
+
+\newpage
+\begin{Problem}
+	\textbf{Gradient descent rate with line search in strongly convex
+		function} 
+	
+	Suppose the function $f : \mathbb{R}^{n} \rightarrow \mathbb{R}$ is strongly convex and twice differentiable, \textit{i.e} $\nabla^2 f(x) \succeq l I$ with constant $l > 0$.
+	Also, its gradient is Lipschitz continuous with constant $L > 0$, \textit{i.e.} we have that $∥∇f (x) − ∇f (y)∥ ≤ L∥x − y∥$
+	for any $x, y$.
+	\\......
+
+\end{Problem}
+
+\begin{Solution}
+	\\
+	......	
+
+
+\end{Solution} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Complete the assignment now
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
